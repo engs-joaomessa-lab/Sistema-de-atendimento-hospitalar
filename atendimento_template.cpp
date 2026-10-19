@@ -69,3 +69,42 @@ public:
         while (dequeue(nome, urgencia)) {}
     }
 };
+
+class Pilha {
+private:
+    No* topo;
+
+public:
+    Pilha() {
+        topo = nullptr;
+    }
+
+    // TODO 4 - Guarda o atendimento mais recente no topo.
+    void push(const char* nome) {
+        No* novo = new No;
+        strcpy(novo->nome, nome);
+        novo->urgencia = 0;
+        novo->prox = topo;
+        topo = novo;
+    }
+
+    // TODO 5 - Retira o registro do topo.
+    bool pop(char* nome) {
+        if (topo == nullptr) return false;
+        No* antigo = topo;
+        strcpy(nome, antigo->nome);
+        topo = topo->prox;
+        delete antigo;
+        return true;
+    }
+
+    // TODO 6 - Consulta o ultimo registro sem remover.
+    const No* peek() const {
+        return topo;
+    }
+
+    ~Pilha() {
+        char nome[256];
+        while (pop(nome)) {}
+    }
+};
